@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: com.example
+testFramework: spock
+sourceLanguage: java
+buildTool: gradle
+features: [app-name, graalvm, gradle, http-client, java, java-application, jib, kubernetes, logback, management, mongo-sync, netty-server, openapi, readme, spock, yaml]

@@ -43,6 +43,7 @@ public interface ReferenceDataServiceMapper {
 
 	com.example.referencedata.dao.entity.DeliveryChannel mapperDeliveryChannelDomanToEntity(
 			com.example.referencedata.domain.DeliveryChannel deliveryChannelDomain);
+	
 
 	com.example.referencedata.domain.LogisticChannel mapperLogisticChannelEntityToDomain(
 			com.example.referencedata.dao.entity.LogisticChannel logisticChannelEntity);
@@ -56,5 +57,37 @@ public interface ReferenceDataServiceMapper {
 
 	List<com.example.referencedata.dao.entity.LogisticChannel> mapperLogisticChannelDomanToEntity(
 			List<com.example.referencedata.domain.LogisticChannel> logisticChannelDomain);
+	
+	
+	
+	List<com.example.referencedata.domain.DeliveryMoment> mapperDeliveryMomentEntityToDomain(
+			List<com.example.referencedata.dao.entity.DeliveryMoment> deliveryMomentEntity);
+
+	List<com.example.referencedata.dao.entity.DeliveryMoment> mapperDeliveryMomentDomanToEntity(
+			List<com.example.referencedata.domain.DeliveryMoment> deliveryMomentDomain);
+
+	
+	com.example.referencedata.domain.DeliveryMoment mapperDeliveryMomentEntityToDomain(
+			com.example.referencedata.dao.entity.DeliveryMoment deliveryMomentEntity);
+
+	com.example.referencedata.dao.entity.DeliveryMoment mapperDeliveryMomentDomanToEntity(
+			com.example.referencedata.domain.DeliveryMoment deliveryMomentDomain);
+	
+	
+	
+	List<com.example.referencedata.domain.StoreOrder> mapperStoreOrderEntityToDomain(
+			List<com.example.referencedata.dao.entity.StoreOrder> storeOrderEntity);
+
+	List<com.example.referencedata.dao.entity.StoreOrder> mapperStoreOrderDomanToEntity(
+			List<com.example.referencedata.domain.StoreOrder> storeOrderDomain);
+
+	
+	com.example.referencedata.domain.StoreOrder mapperStoreOrderEntityToDomain(
+			com.example.referencedata.dao.entity.StoreOrder storeOrderEntity);
+
+	com.example.referencedata.dao.entity.StoreOrder mapperStoreOrderDomanToEntity(
+			com.example.referencedata.domain.StoreOrder storeOrderDomain);
+	
+	
 
 }

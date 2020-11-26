@@ -1,8 +1,12 @@
 package com.example.referencedata.dao;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
+
+import org.bson.conversions.Bson;
 
 import com.mongodb.client.model.Filters;
 import com.mongodb.reactivestreams.client.MongoClient;
@@ -30,6 +34,13 @@ public abstract class BaseMongoClient<T> {
 
 	public Single<List<T>> findByFilterValue(final String fieldName, final String filterValue) {
 		return Flowable.fromPublisher(getCollection().find(Filters.eq(fieldName, filterValue))).toList();
+	}
+	
+	
+	public Single<List<T>> filterNameValueMap(final Map<String,Object> filterNameValueMap) {
+		List<Bson> filterList = new ArrayList<Bson>();
+		filterNameValueMap.forEach((k, v) -> filterList.add(Filters.eq(k, v)));
+		return Flowable.fromPublisher(getCollection().find(Filters.and(filterList))).toList();
 	}
 
 }

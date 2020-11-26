@@ -2,6 +2,7 @@ package com.example.referencedata.controller;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import com.example.referencedata.service.DataService;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.PathVariable;
+import io.micronaut.http.annotation.QueryValue;
 import io.micronaut.validation.Validated;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -84,6 +86,19 @@ public class ReferenceDataController {
 				.findLogisticChannel();
 		LOGGER.info(" Response Received : " + logisticChannelList);
 		return logisticChannelList;
+	}
+	
+	
+	@Get(value = "/deliveryMomement/findBy")
+	@Operation(description = "Retrieves Delivery Momement for the Given Criteria", summary = "Retrieves Delivery Momement for the Given Criteria")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "OK", content = @Content(array = @ArraySchema(schema = @Schema(implementation = com.example.referencedata.dao.entity.DeliveryMoment.class)))),
+			@ApiResponse(responseCode = "500", description = "Internal Server Error : {\"errors\":[{\"code\":\"TECHNICAL_ERROR\",\"message\":\"Unable to process request.\"}]}", content = @Content(schema = @Schema(implementation = String.class))) })
+	public List<com.example.referencedata.dao.entity.DeliveryMoment> findDeliveryMomement(@QueryValue(value = "storeNumber") int storeNumber,@QueryValue(value = "streamNumber") @Nullable String streamNumber,@QueryValue(value = "delivererNumber") @Nullable String delivererNumber) {
+		List<com.example.referencedata.dao.entity.DeliveryMoment> deliveryMomentlList = referenceDataService
+				.findDeliveryMomment(storeNumber,streamNumber,delivererNumber);
+		LOGGER.info(" Response Received : " + deliveryMomentlList);
+		return deliveryMomentlList;
 	}
 
 }

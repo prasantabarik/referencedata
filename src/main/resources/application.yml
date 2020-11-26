@@ -16,7 +16,8 @@ app:
         deliverer: deliverer
         deliveryChannel: delivery-channel
         deliveryStream: delivery-stream
-        logisticChannel: logistic-channel  
+        logisticChannel: logistic-channel
+        deliveryMoment: delivery-moment​ 
 
 endpoints:
   metrics:

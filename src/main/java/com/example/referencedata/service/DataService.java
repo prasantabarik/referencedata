@@ -1,15 +1,19 @@
 package com.example.referencedata.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
 import com.example.referencedata.dao.DelivererClient;
 import com.example.referencedata.dao.DeliveryChannelClient;
+import com.example.referencedata.dao.DeliveryMomentClient;
 import com.example.referencedata.dao.DeliveryStreamClient;
 import com.example.referencedata.dao.LogisticChannelClient;
 import com.example.referencedata.dao.entity.Deliverer;
 import com.example.referencedata.dao.entity.DeliveryChannel;
+import com.example.referencedata.dao.entity.DeliveryMoment;
 import com.example.referencedata.dao.entity.DeliveryStream;
 import com.example.referencedata.dao.entity.LogisticChannel;
 import com.example.referencedata.mapper.ReferenceDataServiceMapper;
@@ -30,6 +34,9 @@ public class DataService {
 
 	@Inject
 	LogisticChannelClient logisticChannelClient;
+	
+	@Inject
+	DeliveryMomentClient deliveryMomentClient;
 
 	public List<com.example.referencedata.domain.Deliverer> findDelivererByValue(String findByValue) {
 		List<Deliverer> delivererEntityList = delivererClient.findByFilterValue("delivererNumber", findByValue)
@@ -57,4 +64,12 @@ public class DataService {
 		return referenceDataServiceMapper.mapperDeliveryStreamEntityToDomain(deliveryStreamEntityList);
 	}
 
+	
+	public List<DeliveryMoment> findDeliveryMomment(int storeNumber,String streamNumber,String delivererNumber) {
+		Map<String,Object> filterNameValueMap = new HashMap<String,Object>();
+		filterNameValueMap.put("storenumber", new Integer(storeNumber));
+		filterNameValueMap.put("streamnumber",new Integer(streamNumber));
+		filterNameValueMap.put("delivererNumber",new Integer(delivererNumber));
+		return  (List<DeliveryMoment>) deliveryMomentClient.filterNameValueMap(filterNameValueMap).blockingGet();
+	}
 }

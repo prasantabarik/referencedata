@@ -8,7 +8,7 @@ micronaut:
             swagger: {paths: 'classpath:META-INF/swagger', mapping: '/swagger/**'}
             swagger-ui: {paths: 'classpath:META-INF/swagger/views/swagger-ui', mapping: '/swagger-ui/**'}  
 mongodb:
-  uri: mongodb://kotlin-dev-evl-cosmos-mongo-db:XkS4vgMCI3dglHVlg3MDhVNQsk1DMYJ5AK7ctA9B7oQp3FSXJfo4ETdmbJ3cAQNcvabkRjfNwpJPcVYocn9WlQ==@kotlin-dev-evl-cosmos-mongo-db.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@kotlin-dev-evl-cosmos-mongo-db
+  uri: set_the_url_of_MongoDB
 
 app:
   mongodb:

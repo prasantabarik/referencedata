@@ -1,0 +1,19 @@
+name: referencedata
+namespace: ""
+cdPipelineName: ""
+cdPipelineStageName: ""
+dnsWildcard: 59ae6b648ca3437aae3a.westeurope.aksapp.io
+framework: java11
+
+database:
+  required: false
+
+
+ingress:
+  required: true
+  site: referencedata
+  path: /referencedata
+
+image:
+  name: referencedata
+  version: latest

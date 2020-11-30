@@ -32,7 +32,7 @@ public abstract class BaseMongoClient<T> {
 		return Flowable.fromPublisher(getCollection().find()).toList();
 	}
 
-	public Single<List<T>> findByFilterValue(final String fieldName, final String filterValue) {
+	public Single<List<T>> findByFilterValue(final String fieldName, final Object filterValue) {
 		return Flowable.fromPublisher(getCollection().find(Filters.eq(fieldName, filterValue))).toList();
 	}
 	

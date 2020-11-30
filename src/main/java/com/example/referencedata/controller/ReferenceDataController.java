@@ -63,6 +63,18 @@ public class ReferenceDataController {
 		LOGGER.info(" Response Received : " + deliveryChannelList);
 		return deliveryChannelList;
 	}
+	
+	@Get(value = "/deliveryChannel/{storeNumber}")
+	@Operation(description = "Retrieves Given Delivery Channel", summary = "Retrieves Given Delivery Channel")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "OK", content = @Content(array = @ArraySchema(schema = @Schema(implementation =  com.example.referencedata.domain.DeliveryChannel.class)))),
+			@ApiResponse(responseCode = "500", description = "Internal Server Error : {\"errors\":[{\"code\":\"TECHNICAL_ERROR\",\"message\":\"Unable to process request.\"}]}", content = @Content(schema = @Schema(implementation = String.class))) })
+	public List<com.example.referencedata.domain.DeliveryChannel> findDeliveryChannel(@PathVariable("storeNumber") String storeNumber) {
+		List<com.example.referencedata.domain.DeliveryChannel> deliveryChannelList = referenceDataService
+				.findDeliveryChannel(storeNumber);
+		LOGGER.info(" Response Received : " + deliveryChannelList);
+		return deliveryChannelList;
+	}
 
 	@Get(value = "/deliveryStream")
 	@Operation(description = "Retrieves All Delivery Stream", summary = "Retrieves All Delivery Stream")
@@ -72,6 +84,18 @@ public class ReferenceDataController {
 	public List<com.example.referencedata.domain.DeliveryStream> findAllDeliveryStream() {
 		List<com.example.referencedata.domain.DeliveryStream> deliveryStreamList = referenceDataService
 				.findDeliveryStream();
+		LOGGER.info(" Response Received : " + deliveryStreamList);
+		return deliveryStreamList;
+	}
+	
+	@Get(value = "/deliveryStream/{streamNumber}")
+	@Operation(description = "Retrieves Given Delivery Stream", summary = "Retrieves Given Delivery Stream")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "OK", content = @Content(array = @ArraySchema(schema = @Schema(implementation = com.example.referencedata.domain.DeliveryStream.class)))),
+			@ApiResponse(responseCode = "500", description = "Internal Server Error : {\"errors\":[{\"code\":\"TECHNICAL_ERROR\",\"message\":\"Unable to process request.\"}]}", content = @Content(schema = @Schema(implementation = String.class))) })
+	public List<com.example.referencedata.domain.DeliveryStream> findDeliveryStream(@PathVariable("streamNumber") String streamNumber) {
+		List<com.example.referencedata.domain.DeliveryStream> deliveryStreamList = referenceDataService
+				.findDeliveryStream(streamNumber);
 		LOGGER.info(" Response Received : " + deliveryStreamList);
 		return deliveryStreamList;
 	}
@@ -92,10 +116,10 @@ public class ReferenceDataController {
 	@Get(value = "/deliveryMomement/findBy")
 	@Operation(description = "Retrieves Delivery Momement for the Given Criteria", summary = "Retrieves Delivery Momement for the Given Criteria")
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "OK", content = @Content(array = @ArraySchema(schema = @Schema(implementation = com.example.referencedata.dao.entity.DeliveryMoment.class)))),
+			@ApiResponse(responseCode = "200", description = "OK", content = @Content(array = @ArraySchema(schema = @Schema(implementation = com.example.referencedata.domain.DeliveryMoment.class)))),
 			@ApiResponse(responseCode = "500", description = "Internal Server Error : {\"errors\":[{\"code\":\"TECHNICAL_ERROR\",\"message\":\"Unable to process request.\"}]}", content = @Content(schema = @Schema(implementation = String.class))) })
-	public List<com.example.referencedata.dao.entity.DeliveryMoment> findDeliveryMomement(@QueryValue(value = "storeNumber") int storeNumber,@QueryValue(value = "streamNumber") @Nullable String streamNumber,@QueryValue(value = "delivererNumber") @Nullable String delivererNumber) {
-		List<com.example.referencedata.dao.entity.DeliveryMoment> deliveryMomentlList = referenceDataService
+	public List<com.example.referencedata.domain.DeliveryMoment> findDeliveryMomement(@QueryValue(value = "storeNumber") int storeNumber,@QueryValue(value = "streamNumber") @Nullable String streamNumber,@QueryValue(value = "delivererNumber") @Nullable String delivererNumber) {
+		List<com.example.referencedata.domain.DeliveryMoment> deliveryMomentlList = referenceDataService
 				.findDeliveryMomment(storeNumber,streamNumber,delivererNumber);
 		LOGGER.info(" Response Received : " + deliveryMomentlList);
 		return deliveryMomentlList;

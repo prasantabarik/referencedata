@@ -53,6 +53,12 @@ public class DataService {
 		List<DeliveryChannel> deliveryChannelEntityList = deliveryChannelClient.findAll().blockingGet();
 		return referenceDataServiceMapper.mapperDeliveryChannelEntityToDomain(deliveryChannelEntityList);
 	}
+	
+	
+	public List<com.example.referencedata.domain.DeliveryChannel> findDeliveryChannel(String filterValue) {
+		List<DeliveryChannel> deliveryChannelEntityList = deliveryChannelClient.findByFilterValue("storeNumber", new Integer(filterValue)).blockingGet();
+		return referenceDataServiceMapper.mapperDeliveryChannelEntityToDomain(deliveryChannelEntityList);
+	}
 
 	public List<com.example.referencedata.domain.LogisticChannel> findLogisticChannel() {
 		List<LogisticChannel> logisticChannelEntityList = logisticChannelClient.findAll().blockingGet();
@@ -63,13 +69,19 @@ public class DataService {
 		List<DeliveryStream> deliveryStreamEntityList = deliveryStreamClient.findAll().blockingGet();
 		return referenceDataServiceMapper.mapperDeliveryStreamEntityToDomain(deliveryStreamEntityList);
 	}
+	
+	public List<com.example.referencedata.domain.DeliveryStream> findDeliveryStream(String streamNumber) {
+		List<DeliveryStream> deliveryStreamEntityList = deliveryStreamClient.findByFilterValue("streamNumber", streamNumber).blockingGet();
+		return referenceDataServiceMapper.mapperDeliveryStreamEntityToDomain(deliveryStreamEntityList);
+	}
 
 	
-	public List<DeliveryMoment> findDeliveryMomment(int storeNumber,String streamNumber,String delivererNumber) {
+	public List<com.example.referencedata.domain.DeliveryMoment> findDeliveryMomment(int storeNumber,String streamNumber,String delivererNumber) {
 		Map<String,Object> filterNameValueMap = new HashMap<String,Object>();
 		filterNameValueMap.put("storenumber", new Integer(storeNumber));
-		filterNameValueMap.put("streamnumber",new Integer(streamNumber));
-		filterNameValueMap.put("delivererNumber",new Integer(delivererNumber));
-		return  (List<DeliveryMoment>) deliveryMomentClient.filterNameValueMap(filterNameValueMap).blockingGet();
+		if(streamNumber != null)filterNameValueMap.put("streamnumber",new Integer(streamNumber));
+		if(delivererNumber != null) filterNameValueMap.put("delivererNumber",new Integer(delivererNumber));
+		List deliveryMomentListEntity = (List<DeliveryMoment>) deliveryMomentClient.filterNameValueMap(filterNameValueMap).blockingGet();
+		return  referenceDataServiceMapper.mapperDeliveryMomentEntityToDomain(deliveryMomentListEntity);
 	}
 }

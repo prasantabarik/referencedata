@@ -2,8 +2,17 @@ package com.example.referencedata.dao.entity;
 
 import java.util.List;
 
+import org.bson.codecs.pojo.annotations.BsonId;
+import org.bson.codecs.pojo.annotations.BsonProperty;
+import org.bson.types.ObjectId;
+
 public class DeliveryMoment {
 	
+	@BsonProperty("_id")
+	@BsonId
+	private ObjectId _id;
+	
+	@BsonProperty("id")
 	private String id;
 	
 	private int storenumber;
@@ -30,6 +39,24 @@ public class DeliveryMoment {
 	
 	public List<StoreOrder> getStoreOrder() {
 		return storeOrder;
+	}
+
+	public ObjectId get_id() {
+		return _id;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	@BsonProperty("_id")
+	public void set_id(ObjectId _id) {
+		this._id = _id;
+	}
+
+	@BsonProperty("id")
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public void setStoreOrder(List<StoreOrder> storeOrder) {
